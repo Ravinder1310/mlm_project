@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Toaster } from "react-hot-toast";
+// import { Toaster } from "react-hot-toast";
 
 const Layout = ({ children, title, description, keywords, author }) => {
   return (
@@ -12,9 +12,9 @@ const Layout = ({ children, title, description, keywords, author }) => {
         <meta name="author" content={author} />
         <title>{title}</title>
       </Helmet>
-      <Header />
+      {/* <Header /> */}
       <main style={{ minHeight: "70vh" }}>
-        <Toaster />
+        {/* <Toaster /> */}
         {children}
       </main>
     </div>
@@ -22,10 +22,10 @@ const Layout = ({ children, title, description, keywords, author }) => {
 };
 
 Layout.defaultProps = {
-  title: "Ecommerce app - Shop now",
-  discription: "mern stack application",
+  title: "MLM app - Expand Network",
+  discription: "MLM Application",
   keywords: "mern. react, node, mongodb",
-  author: "ecommerce",
+  author: "MLM",
 };
 
 export default Layout;
