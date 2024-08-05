@@ -2,13 +2,14 @@
     width: 40%;
     margin: auto;
     text-align: center;
-    background: #e58725;
-    background: linear-gradient(0deg, rgba(245, 138, 38, 1) 40%, rgba(245, 247, 247, 1) 170%);
+    background: rgb(20,75,223);
+    background: linear-gradient(0deg, rgba(20,75,223,1) 40%, rgba(251,247,247,1) 100%);
     display: block;
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
+    padding: 30px 0px;
   }
   
-  .loginContainer > img {
+  .loginContainer > a > img {
     width: 150px;
     height: 150px;
     margin: auto;
@@ -64,6 +65,8 @@
     border-radius: 30px;
     padding-left: 10px;
   }
+
+
   
   .loginInputWrapper > input::placeholder {
     color: #ccc;
@@ -100,8 +103,8 @@
   
   .signUpBtn {
     width: 90%;
-    background: rgb(77, 36, 28);
-    background: linear-gradient(0deg, rgba(77, 36, 28, 1) 30%, rgba(251, 250, 249, 1) 95%);
+    background: rgb(223,20,20);
+    background: radial-gradient(circle, rgba(223,20,20,1) 50%, rgba(251,247,247,1) 120%);
     padding: 10px 20px;
     border-radius: 20px;
     margin-top: 30px;
@@ -123,7 +126,7 @@
   }
   
   .forgot > a {
-    color: blue;
+    color: red;
     font-weight: 700;
   }
   

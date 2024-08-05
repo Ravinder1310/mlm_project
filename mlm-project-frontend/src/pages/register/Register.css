@@ -1,21 +1,17 @@
 .registerContainer {
     width: 40%;
-    /* border: 2px solid red; */
     margin: auto;
     text-align: center;
-    /* margin-top: 40px; */
-    background: #e58725;
-    background: linear-gradient(0deg, rgba(245, 138, 38, 1) 40%, rgba(245, 247, 247, 1) 130%);
+    background: rgb(20,75,223);
+    background: linear-gradient(0deg, rgba(20,75,223,1) 40%, rgba(251,247,247,1) 100%);
     display: block;
-    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;  */
-    margin-bottom: 40px;
   }
   
   .registerHeader {
     display: flex;
     padding: 20px 10px;
     align-items: center;
-    background-color: rgb(228, 135, 36);
+    background-color: rgb(119, 150, 235);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
   
@@ -25,7 +21,7 @@
     color: white;
   }
   
-  .registerContainer > img {
+  .registerContainer > a > img {
     width: 180px;
     height: 180px;
     margin: auto;
@@ -86,8 +82,8 @@
 
   .signUpBtn{
     width: 90%;
-    background: rgb(77,36,28);
-    background: linear-gradient(0deg, rgba(77,36,28,1) 30%, rgba(251,250,249,1) 95%);
+    background: rgb(223,20,20);
+    background: radial-gradient(circle, rgba(223,20,20,1) 50%, rgba(251,247,247,1) 120%);
     padding: 10px 20px;
     border-radius: 20px;
     margin-top: 30px;
@@ -108,7 +104,7 @@
   }
 
   .exist > a{
-    color: blue;
+    color: red;
   }
   
   @media screen and (max-width: 1000px) {

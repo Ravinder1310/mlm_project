@@ -21,7 +21,7 @@ const Login = () => {
           <option value="english">English</option>
           <option value="hindi">Hindi</option>
         </select>
-        <img src="/images/mlm_logo.jpg" alt="Logo" />
+        <a href="/"><img src="/images/mlm_logo.jpg" alt="Logo" /></a>
 
         <div className="loginInputWrapper">
           <img
@@ -54,7 +54,7 @@ const Login = () => {
 
         <div className="forgot">
           <a href="/">Forgot Password</a>
-          <a href="/">Register Now</a>
+          <a href="/register">Register Now</a>
         </div>
 
         <button className="signUpBtn">Login</button>

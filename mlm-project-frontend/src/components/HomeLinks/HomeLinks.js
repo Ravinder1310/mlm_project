@@ -46,11 +46,11 @@ function HomeLinks() {
         },
     ]
   return (
-    <div className=" flex p-2 flex-wrap justify-center">
+    <div className=" flex p-2 flex-wrap justify-center ">
             {
                 data.map((item,idx)=>{
                     return(
-                        <div key={idx} className="flex w-14 flex-col m-1 items-center ">
+                        <div key={idx} className="flex  flex-col m-1 items-center border border-spacing-1 w-15">
                             <img className="rounded-full h-10" src={item.img}/>
                             <p className="text-sm text-center" >{item.name}</p>
                         </div>

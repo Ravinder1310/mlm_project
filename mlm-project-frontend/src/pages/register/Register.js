@@ -10,7 +10,8 @@ const Register = () => {
           <button>◀️Back</button>
           <h1>Register</h1>
         </div>
-        <img src="/images/mlm_logo.jpg" alt="Logo" />
+        <a href="/"><img src="/images/mlm_logo.jpg" alt="Logo" /></a>
+        
 
         <div class="inputWrapper">
           <img
@@ -43,7 +44,7 @@ const Register = () => {
         </div>
         <div className="exist">
           <h3>Existing Account?</h3>
-          <a href="/">Sign in now</a>
+          <a href="/login">Sign in now</a>
         </div>
         <button className="signUpBtn">Signup</button>
       </div>
