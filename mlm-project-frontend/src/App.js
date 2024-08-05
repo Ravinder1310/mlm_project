@@ -1,6 +1,5 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Login from './pages/login/Login.js';
 import Register from './pages/register/Register.js';
 import MyTeam from './pages/MyTeam/MyTeam.js';
 

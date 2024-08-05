@@ -5,3 +5,10 @@
 body{
   background-color: rgb(241, 183, 121);
 }
+*{
+    margin: 0px;
+    padding: 0px
+}
+/* //header */
+@import "~slick-carousel/slick/slick.css"; 
+@import "~slick-carousel/slick/slick-theme.css";
