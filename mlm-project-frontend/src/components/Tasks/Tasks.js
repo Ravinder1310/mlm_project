@@ -20,10 +20,10 @@ function Tasks() {
         },
     ]
   return (
-    <>
+    <div className='bg-red-500'>
     <div className="flex justify-between text-white  p-4 ">
       <div>TASK</div>
-      <div className="text-sm p-2  rounded-full  bg-red-500 text-white">MY TASK</div>
+      <div className="text-sm p-2 bg-blue-500  rounded-full   text-white">MY TASK</div>
     </div>
     <div className="flex justify-evenly m-4">
     {
@@ -37,7 +37,7 @@ function Tasks() {
         })
     }
     </div>
-    </>
+    </div>
   )
 }
 

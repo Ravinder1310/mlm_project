@@ -31,10 +31,10 @@ const MyTeam = () => {
 
   return (
     <Layout>
-    <div className="myTeamContainer">
+    <div className="myTeamContainer text-white">
       <div className="teamHeader">
         <button>◀️Back</button>
-        <h1>My Teams</h1>
+        <h1 className="text-white">My Teams</h1>
       </div>
       <div className="memberStatus">
         <button

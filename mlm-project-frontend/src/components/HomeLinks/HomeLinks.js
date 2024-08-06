@@ -54,7 +54,7 @@ const navigate = useNavigate();
             {
                 data.map((item,idx)=>{
                     return(
-                        <div key={idx} onClick={() => navigate(`${item.link}`)} className="flex  flex-col m-2 justify-center  items-center  ">
+                        <div key={idx} onClick={() => navigate(`${item.link}`)} className="flex cursor-pointer  flex-col m-2 justify-center  items-center  ">
                             {/* <a  href={${item.link}}> */}
                             <img className="rounded-full h-10" src={item.img}/>
                             <p className="text-sm text-white text-center" >{item.name}</p>

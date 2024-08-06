@@ -2,8 +2,8 @@
     width: 40%;
     margin: auto;
     text-align: center;
-    background: rgb(20,75,223);
-    background: linear-gradient(0deg, rgba(20,75,223,1) 40%, rgba(251,247,247,1) 100%);
+    background: rgb(239, 68, 68);
+    /* background: linear-gradient(0deg, rgba(20,75,223,1) 40%, rgba(251,247,247,1) 100%); */
     display: block;
   }
   
@@ -11,7 +11,7 @@
     display: flex;
     padding: 20px 10px;
     align-items: center;
-    background-color: rgb(119, 150, 235);
+    background: rgb(239, 68, 68);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
   
@@ -82,8 +82,8 @@
 
   .signUpBtn{
     width: 90%;
-    background: rgb(223,20,20);
-    background: radial-gradient(circle, rgba(223,20,20,1) 50%, rgba(251,247,247,1) 120%);
+    background: rgb(20, 162, 223);
+    background: radial-gradient(circle, rgb(20, 162, 223) 50%, rgba(251,247,247,1) 120%);
     padding: 10px 20px;
     border-radius: 20px;
     margin-top: 30px;
