@@ -8,32 +8,32 @@ function HomeLinks() {
         {
             img:m1,
             name:"Recharge",
-            link:''
+            link:'/login'
         },
         {
             img:m2,
             name:"Withdrawl",
-            link:''
+            link:'/register'
         },
         {
             img:m3,
             name:"Teams",
-            link:''
+            link:'/bonus'
         },
         {
             img:m4,
             name:"Invitation Link",
-            link:''
+            link:'/myteam'
         },
         {
             img:m1,
             name:"reedem Bonus",
-            link:''
+            link:'/bindBankCard'
         },
         {
             img:m1,
             name:"user Center",
-            link:''
+            link:'/invitation'
         },
         {
             img:m1,
@@ -50,9 +50,11 @@ function HomeLinks() {
             {
                 data.map((item,idx)=>{
                     return(
-                        <div key={idx} className="flex  flex-col m-1 items-center border border-spacing-1 w-15">
+                        <div key={idx} className="flex  flex-col m-1 items-center border border-spacing-1">
+                            <a href={`${item.link}`}>
                             <img className="rounded-full h-10" src={item.img}/>
                             <p className="text-sm text-center" >{item.name}</p>
+                            </a>
                         </div>
                     )
                 })
