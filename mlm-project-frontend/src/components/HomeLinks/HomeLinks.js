@@ -3,7 +3,11 @@ import m1 from './recharge.png'
 import m2 from './withdrawl.webp'
 import m3 from './teams.png'
 import m4 from './invitation.png'
+import { useNavigate } from 'react-router-dom'
 function HomeLinks() {
+
+const navigate = useNavigate();
+
     const data=[
         {
             img:m1,
@@ -46,15 +50,15 @@ function HomeLinks() {
         },
     ]
   return (
-    <div className=" flex p-2 flex-wrap justify-center ">
+    <div className="  grid grid-cols-4  ">
             {
                 data.map((item,idx)=>{
                     return(
-                        <div key={idx} className="flex  flex-col m-1 items-center border border-spacing-1">
-                            <a href={`${item.link}`}>
+                        <div key={idx} onClick={() => navigate(`${item.link}`)} className="flex  flex-col m-2 justify-center  items-center  ">
+                            {/* <a  href={${item.link}}> */}
                             <img className="rounded-full h-10" src={item.img}/>
-                            <p className="text-sm text-center" >{item.name}</p>
-                            </a>
+                            <p className="text-sm text-white text-center" >{item.name}</p>
+                            {/* </a> */}
                         </div>
                     )
                 })

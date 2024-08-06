@@ -3,31 +3,31 @@ import h1 from './header1.webp';
 import h2 from './header2.jpg';
 import h3 from './header3.webp';
 
-const Header = () => {
+const Slider = () => {
     return (
-        <div className="p-4 bg-blue-500 text-center">
+        <div className=" p-4 bg-blue-500 text-center">
             <div id="indicators-carousel" className="relative w-full" data-carousel="static">
                 {/* Carousel wrapper */}
                 <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
                     {/* Item 1 */}
-                    <div className="hidden duration-700 ease-in-out" data-carousel-item="active">
-                        <img src={'/images/header1.webp'} className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-150" alt="Slide 1" />
+                    <div className="hidden bg-cover duration-700 ease-in-out" data-carousel-item="active">
+                        <img src={'/images/header1.webp'} className="absolute h-4/5 block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-150" alt="Slide 1" />
                     </div>
                     {/* Item 2 */}
-                    <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src={h2} className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-30" alt="Slide 2" />
+                    <div className="hidden bg-cover duration-700 ease-in-out" data-carousel-item>
+                        <img src={h2} className="absolute block h-4/5 w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-30" alt="Slide 2" />
                     </div>
                     {/* Item 3 */}
-                    <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src={h3} className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-150" alt="Slide 3" />
+                    <div className="hidden bg-cover duration-700 ease-in-out" data-carousel-item>
+                        <img src={h3} className="absolute block h-4/5 w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-150" alt="Slide 3" />
                     </div>
                     {/* Item 4 */}
-                    <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src={h3} className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-150" alt="Slide 4" />
+                    <div className="hidden bg-cover duration-700 ease-in-out" data-carousel-item>
+                        <img src={h3} className="absolute block h-4/5 w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-150" alt="Slide 4" />
                     </div>
                     {/* Item 5 */}
-                    <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src={h3} className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-150" alt="Slide 5" />
+                    <div className="hidden bg-cover duration-700 ease-in-out" data-carousel-item>
+                        <img src={h3} className="absolute block h-4/5 w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-150" alt="Slide 5" />
                     </div>
                 </div>
                 {/* Slider indicators */}
@@ -56,9 +56,9 @@ const Header = () => {
                     </span>
                 </button>
             </div>
-            <input type='text' className='w-11/12 rounded-lg' placeholder='hello Sumit here'/>
+            <input type='text' className='w-11/12 m-4 rounded-lg' placeholder='hello Sumit here'/>
         </div>
     );
 };
 
-export default Header;
+export default Slider;
