@@ -2,8 +2,9 @@
     width: 40%;
     margin: auto;
     text-align: center;
-    background: rgb(20,75,223);
-    background: linear-gradient(0deg, rgba(20,75,223,1) 40%, rgba(251,247,247,1) 100%);
+    background: rgb(239, 68, 68);
+    /* background: rgb(20,75,223); */
+    /* background: linear-gradient(0deg, rgba(20,75,223,1) 40%, rgba(251,247,247,1) 100%); */
     display: block;
     /* margin-bottom: 40px; */
     padding: 30px 0px;
@@ -103,8 +104,8 @@
   
   .signUpBtn {
     width: 90%;
-    background: rgb(223,20,20);
-    background: radial-gradient(circle, rgba(223,20,20,1) 50%, rgba(251,247,247,1) 120%);
+    background: rgb(20, 162, 223);
+    background: radial-gradient(circle, rgb(20, 162, 223) 50%, rgba(251,247,247,1) 120%);
     padding: 10px 20px;
     border-radius: 20px;
     margin-top: 30px;
@@ -121,12 +122,12 @@
   }
   
   .forgot > a:first-child {
-    color: rgb(65, 62, 62);
+    color: black;
     font-weight: 600;
   }
   
   .forgot > a {
-    color: red;
+    color: white;
     font-weight: 700;
   }
   

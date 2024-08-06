@@ -1,52 +1,120 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Register.css";
 import Layout from "../../components/Layout";
 
 const Register = () => {
+  const navigate = useNavigate();
+  
+  // State variables for form inputs
+  const [phone, setPhone] = useState("");
+  const [smsCode, setSmsCode] = useState("");
+  const [password, setPassword] = useState("");
+  const [code, setCode] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Save form data to local storage
+    const userData = {
+      phone,
+      smsCode,
+      password,
+      code
+    };
+    
+    localStorage.setItem("userData", JSON.stringify(userData));
+
+    // Show success toast notification
+    toast.success("Registered successfully!");
+
+    // Disable the button and keep it disabled for 2 seconds
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      navigate("/"); // Redirect to the home page after 2 seconds
+    }, 2000);
+  };
+
   return (
     <Layout>
-      <div class="registerContainer">
-        <div class="registerHeader">
-          <button>◀️Back</button>
+      <div className="registerContainer">
+        <div className="registerHeader">
+          <button onClick={() => navigate(-1)}>◀️ Back</button>
           <h1>Register</h1>
         </div>
         <a href="/"><img src="/images/mlm_logo.jpg" alt="Logo" /></a>
+
+        <form onSubmit={handleSubmit}>
+          <div className="inputWrapper">
+            <img
+              src="/images/phoneInput.png"
+              alt="Phone Icon"
+              className="phoneIcon"
+            />
+            <span className="countryCode">+91</span>
+            <input
+              type="tel"
+              placeholder="Please enter mobile number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+
+          <div className="inputWrapper">
+            <img src="/images/smsInput.png" alt="SMS Icon" className="phoneIcon" />
+            <input
+              type="tel"
+              placeholder="SMS verification code"
+              value={smsCode}
+              onChange={(e) => setSmsCode(e.target.value)}
+            />
+            <button type="button" className="sendButton">Send</button>
+          </div>
+
+          <div className="inputWrapper">
+            <img
+              src="/images/passInput.png"
+              alt="Password Icon"
+              className="phoneIcon"
+            />
+            <input
+              type="password"
+              placeholder="Please enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <div className="inputWrapper">
+            <img src="/images/codeInput.png" alt="Code Icon" className="phoneIcon" />
+            <input
+              type="text"
+              placeholder="Please enter the code"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+            />
+          </div>
+
+          <div className="exist">
+            <h3>Existing Account?</h3>
+            <div onClick={() => navigate('/login')} className=" text-white">Sign in now</div>
+          </div>
+          
+          <button
+            type="submit"
+            className="signUpBtn bg-blue-300"
+            // disabled={isSubmitting}
+          >
+            Signup
+          </button>
+        </form>
         
-
-        <div class="inputWrapper">
-          <img
-            src="/images/phoneInput.png"
-            alt="Phone Icon"
-            class="phoneIcon"
-          />
-          <span class="countryCode">+91</span>
-          <input type="tel" placeholder="Please enter mobile number" />
-        </div>
-
-        <div class="inputWrapper">
-          <img src="/images/smsInput.png" alt="SMS Icon" class="phoneIcon" />
-          <input type="tel" placeholder="SMS verification code" />
-          <button class="sendButton">Send</button>
-        </div>
-
-        <div class="inputWrapper">
-          <img
-            src="/images/passInput.png"
-            alt="Password Icon"
-            class="phoneIcon"
-          />
-          <input type="password" placeholder="Please enter your password" />
-        </div>
-
-        <div class="inputWrapper">
-          <img src="/images/codeInput.png" alt="Code Icon" class="phoneIcon" />
-          <input type="text" placeholder="Please enter the code" />
-        </div>
-        <div className="exist">
-          <h3>Existing Account?</h3>
-          <a href="/login">Sign in now</a>
-        </div>
-        <button className="signUpBtn">Signup</button>
+        <ToastContainer />
       </div>
     </Layout>
   );
