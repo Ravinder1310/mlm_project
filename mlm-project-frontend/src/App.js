@@ -30,7 +30,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/my-team" element={<MyTeam/>} />
       <Route path="/bindBankcard" element={<BindBankCard />} />
-      <Route path="/invitation" element={<Invitation />} />
+      <Route path="/invite-friends" element={<Invitation />} />
       <Route path="/bonus" element={<Bonus />} />
       </>}
       </Routes>

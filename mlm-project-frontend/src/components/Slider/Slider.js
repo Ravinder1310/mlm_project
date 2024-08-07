@@ -175,7 +175,7 @@ const Slider = () => {
                     </span>
                 </button>
             </div>
-            <input type='text' className='w-11/12 m-4 rounded-lg' placeholder='hello Sumit here'/>
+            <div  className=' mt-4 border-2 font-semibold text-red-500 border-blue-400 rounded-lg bg-white p-2 text-xl' >jwnsjnjwswjsnsnjnj </div>
         </div>
     );
 };

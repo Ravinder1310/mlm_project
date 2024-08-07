@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function MyProfile({toggle}) {
     const navigate=useNavigate()
   return (
-    <div className="bg-red-500 w-full sm:w-2/5 mx-auto min-h-screen pb-16">
+    <div className="bg-red-500 sm:w-2/5 mx-auto min-h-screen pb-16">
       {/* <div className="flex justify-between items-center px-4 py-2"> */}
        
       <div className="px-4 py-8">
@@ -73,8 +73,8 @@ function MyProfile({toggle}) {
               <img src="https://www.svgrepo.com/show/338681/right-arrow.svg" alt="right arrow" className="w-5 h-5" />
             </div>
           </div>
-          <div className="bg-white rounded-md p-4 shadow-md flex items-center">
-            <div className="rounded-full bg-blue-200 p-2 mr-4">
+          <div className="bg-white rounded-md p-4 shadow-md flex items-center cursor-pointer hover:bg-red-300 duration-200"  onClick={()=>{navigate('/invite-friends')}}>
+            <div className="rounded-full bg-blue-200 p-2 mr-4 ">
               <img src="https://www.svgrepo.com/show/132808/user.svg" alt="user" className="w-5 h-5" />
             </div>
             <p className="text-gray-700 font-bold text-lg">Invite Friends</p>
