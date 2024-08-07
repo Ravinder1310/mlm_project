@@ -129,7 +129,7 @@ const Login = ({toggle}) => {
   };
 
   return (
-    <Layout>
+    <Layout title={"Login - Rita Drinks"}>
       <div className="loginContainer">
         <select className="languageSlector">
           <option value="english">English</option>
@@ -184,10 +184,12 @@ const Login = ({toggle}) => {
 
           <div className="forgot">
             <div>Forgot Password</div>
-            <div className="text-white" onClick={() => navigate('/register')}>Register Now</div>
+            <div className="text-white cursor-pointer" onClick={() => navigate('/register')}>Register Now</div>
           </div>
 
-          <button type="submit" className="signUpBtn">Login</button>
+         <div className="flex justify-center">
+           <button type="submit" className="sign_tt">Login</button>
+          </div>
         </form>
 
         <ToastContainer />

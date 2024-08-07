@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Register.css";
 import Layout from "../../components/Layout";
+import 'flowbite/dist/flowbite.css';
+import "./Register.css";
+
 
 const Register = () => {
   const navigate = useNavigate();
@@ -102,16 +104,12 @@ const Register = () => {
 
           <div className="exist">
             <h3>Existing Account?</h3>
-            <div onClick={() => navigate('/login')} className=" text-white">Sign in now</div>
+            <div onClick={() => navigate('/')} className="cursor-pointer text-white">Sign in now</div>
           </div>
           
-          <button
-            type="submit"
-            className="signUpBtn bg-blue-300"
-            // disabled={isSubmitting}
-          >
-            Signup
-          </button>
+          <div className="flex justify-center">
+           <button type="submit" className="sign_tt">Sign UP</button>
+          </div>
         </form>
         
         <ToastContainer />

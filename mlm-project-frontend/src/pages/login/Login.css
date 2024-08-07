@@ -102,11 +102,10 @@
     background-color: #4a3025;
   }
   
-  .signUpBtn {
+  .sign_tt {
     width: 90%;
     background: rgb(20, 162, 223);
-    background: radial-gradient(circle, rgb(20, 162, 223) 50%, rgba(251,247,247,1) 120%);
-    padding: 10px 20px;
+    background: radial-gradient(circle, rgb(20, 162, 223) 50%, rgba(251,247,247,1) 120%) !important;    padding: 10px 20px;
     border-radius: 20px;
     margin-top: 30px;
     font-size: 25px;
