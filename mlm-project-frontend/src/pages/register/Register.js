@@ -2,49 +2,56 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Register.css";
 import Layout from "../../components/Layout";
+import "./Register.css";
+import { useAuth } from "../../context/auth";
 
 const Register = () => {
   const navigate = useNavigate();
-  
-  // State variables for form inputs
-  const [phone, setPhone] = useState("");
+  const { register, sendSmsCode } = useAuth();
+  const [mobileNumber, setMobileNumber] = useState("");
   const [smsCode, setSmsCode] = useState("");
+  const [generatedSmsCode, setGeneratedSmsCode] = useState("");
   const [password, setPassword] = useState("");
-  const [code, setCode] = useState("");
+  const [referralCode, setReferralCode] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSendSms = async () => {
+    if (!mobileNumber) {
+      toast.error("Please enter your mobile number.");
+      return;
+    }
+  
+    try {
+      const code = await sendSmsCode(mobileNumber);
+      if (code) {
+        setGeneratedSmsCode(code);
+        toast.success("SMS verification code sent!");
+      } else {
+        toast.error("Failed to retrieve SMS code.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while sending SMS code.");
+    }
+  };
+  
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Save form data to local storage
-    const userData = {
-      phone,
-      smsCode,
-      password,
-      code
-    };
-    
-    localStorage.setItem("userData", JSON.stringify(userData));
-
-    // Show success toast notification
-    toast.success("Registered successfully!");
-
-    // Disable the button and keep it disabled for 2 seconds
+    if (smsCode !== generatedSmsCode) {
+      toast.error("Invalid SMS verification code.");
+      return;
+    }
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      navigate("/"); // Redirect to the home page after 2 seconds
-    }, 2000);
+    await register(mobileNumber, smsCode, password, referralCode);
+    setIsSubmitting(false);
   };
 
   return (
     <Layout>
       <div className="registerContainer">
         <div className="registerHeader">
-          <button onClick={() => navigate(-1)}>◀️ Back</button>
+          <button onClick={() => navigate(-1)}>◀ Back</button>
           <h1>Register</h1>
         </div>
         <a href="/"><img src="/images/mlm_logo.jpg" alt="Logo" /></a>
@@ -60,8 +67,8 @@ const Register = () => {
             <input
               type="tel"
               placeholder="Please enter mobile number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              value={mobileNumber}
+              onChange={(e) => setMobileNumber(e.target.value)}
             />
           </div>
 
@@ -69,11 +76,18 @@ const Register = () => {
             <img src="/images/smsInput.png" alt="SMS Icon" className="phoneIcon" />
             <input
               type="tel"
-              placeholder="SMS verification code"
+              placeholder="Enter SMS verification code"
               value={smsCode}
               onChange={(e) => setSmsCode(e.target.value)}
             />
-            <button type="button" className="sendButton">Send</button>
+            <button
+              type="button"
+              className="sendButton"
+              onClick={handleSendSms}
+              disabled={isSubmitting}
+            >
+              Send Code
+            </button>
           </div>
 
           <div className="inputWrapper">
@@ -91,27 +105,33 @@ const Register = () => {
           </div>
 
           <div className="inputWrapper">
-            <img src="/images/codeInput.png" alt="Code Icon" className="phoneIcon" />
+            <img
+              src="/images/codeInput.png"
+              alt="Referral Code Icon"
+              className="phoneIcon"
+            />
             <input
               type="text"
-              placeholder="Please enter the code"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
+              placeholder="Referral code (optional)"
+              value={referralCode}
+              onChange={(e) => setReferralCode(e.target.value)}
             />
           </div>
 
           <div className="exist">
             <h3>Existing Account?</h3>
-            <div onClick={() => navigate('/login')} className=" text-white">Sign in now</div>
+            <div onClick={() => navigate('/')} className="cursor-pointer text-white">Sign in now</div>
           </div>
           
-          <button
-            type="submit"
-            className="signUpBtn bg-blue-300"
-            // disabled={isSubmitting}
-          >
-            Signup
-          </button>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="signUpBtn"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Registering...' : 'Register'}
+            </button>
+          </div>
         </form>
         
         <ToastContainer />

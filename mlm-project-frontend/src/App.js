@@ -13,30 +13,16 @@ import MyProfile from './components/MyProfile/MyProfile.js';
 import MyTeam from './components/MyTeam/MyTeam.js';
 import { useState } from 'react';
 function App() {
-  const [loggedIn,setLoggedIn]=useState(false);
-  const toggle=()=>{
-    setLoggedIn(!loggedIn);
-  }
+  
   return (
     <div className="bg-slate-400">
+      <div className="wrapper">
       <Routes>
-      <Route path="/" element={<Login toggle={toggle}/>} />
-      <Route path="/register" element={<Register />} />
-      {loggedIn&&<>
-      <Route path="/home" element={<Home />} />
-      <Route path="/my-profile" element={<MyProfile toggle={toggle}/>} />
-      <Route path="/all-products" element={<ProductPage/>} />
-      <Route path="/single-product" element={<SingleProduct/>} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/my-team" element={<MyTeam/>} />
-      <Route path="/bindBankcard" element={<BindBankCard />} />
-      <Route path="/invitation" element={<Invitation />} />
-      <Route path="/bonus" element={<Bonus />} />
-      </>}
+        <Route path="/home" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
-    {/* <BottomNav/>  */}
-    { loggedIn &&<BottomNav/> }
-      
+    </div>
     </div>
   );
 }

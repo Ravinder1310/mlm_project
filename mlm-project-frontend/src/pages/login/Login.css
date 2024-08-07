@@ -89,18 +89,18 @@
     font-weight: bold;
   }
   
-  .sendButton {
+  /* .sendButton {
     background-color: #5a3c31;
     color: white;
     border: none;
     border-radius: 10px;
     padding: 5px 20px;
     cursor: pointer;
-  }
+  } */
   
-  .sendButton:hover {
+  /* .sendButton:hover {
     background-color: #4a3025;
-  }
+  } */
   
   .signUpBtn {
     width: 90%;

@@ -1,87 +1,15 @@
-// import React, { useState, useEffect } from "react";
-// import "./Login.css";
-// import Layout from "../../components/Layout";
-// import { useNavigate } from "react-router-dom";
-
-// const Login = () => {
-//   const navigate=useNavigate()
-//   const [verificationCode, setVerificationCode] = useState("");
-
-//   useEffect(() => {
-//     generateVerificationCode();
-//   }, []);
-
-//   const generateVerificationCode = () => {
-//     const code = Math.floor(1000 + Math.random() * 9000); // Generates a random 4-digit number
-//     setVerificationCode(code);
-//   };
-
-//   return (
-//     <Layout>
-//       <div className="loginContainer">
-//         <select className="languageSlector">
-//           <option value="english">English</option>
-//           <option value="hindi">Hindi</option>
-//         </select>
-//         <a href="/"><img src="/images/mlm_logo.jpg" alt="Logo" /></a>
-
-//         <div className="loginInputWrapper">
-//           <img
-//             src="/images/phoneInput.png"
-//             alt="Phone Icon"
-//             className="phoneIcon"
-//           />
-//           <span className="countryCode">+91</span>
-//           <input type="tel" placeholder="Please enter mobile number" />
-//         </div>
-
-//         <div className="loginInputWrapper">
-//           <img
-//             src="/images/passInput.png"
-//             alt="Password Icon"
-//             className="phoneIcon"
-//           />
-//           <input type="password" placeholder="Please enter your password" />
-//         </div>
-
-//         <div className="loginInputWrapper">
-//           <img
-//             src="/images/smsInput.png"
-//             alt="Code Icon"
-//             className="phoneIcon"
-//           />
-//           <input type="text" placeholder="Graphic verification code" />
-//           <div className="verificationCode">{verificationCode}</div>
-//         </div>
-
-//         <div className="forgot">
-//           <div >Forgot Password</div>
-//           <div className="text-white" onClick={()=>{navigate('/register')}} >Register Now</div>
-//         </div>
-
-//         <button className="signUpBtn ">Login</button>
-//       </div>
-//     </Layout>
-//   );
-// };
-
-// export default Login;
-
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 import Layout from "../../components/Layout";
+import { useAuth } from "../../context/auth";
 
 const Login = ({toggle}) => {
   const navigate = useNavigate();
-  const [phone, setPhone] = useState("");
+  const { login } = useAuth();
+  const [mobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");
   const [inputCaptcha, setInputCaptcha] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
@@ -91,45 +19,21 @@ const Login = ({toggle}) => {
   }, []);
 
   const generateVerificationCode = () => {
-    const code = Math.floor(1000 + Math.random() * 9000); // Generates a random 4-digit number
+    const code = Math.floor(1000 + Math.random() * 9000);
     setVerificationCode(code);
   };
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    const storedUserData = JSON.parse(localStorage.getItem("userData"));
-
-    if (!storedUserData) {
-      toast.error("No registered user found. Please register first.");
-      return;
-    }
-
-    const { phone: storedPhone, password: storedPassword } = storedUserData;
-
-    if (phone !== storedPhone) {
-      toast.error("Invalid phone number.");
-      return;
-    }
-
-    if (password !== storedPassword) {
-      toast.error("Invalid password.");
-      return;
-    }
-
     if (inputCaptcha !== verificationCode.toString()) {
       toast.error("Invalid CAPTCHA code.");
       return;
     }
-    toggle()
-    toast.success("Logged in successfully!");
-    setTimeout(() => {
-      navigate("/home");
-    }, 2000);
+    login(mobileNumber, password, inputCaptcha, verificationCode);
   };
 
   return (
-    <Layout>
+    <Layout title={"Login - Rita Drinks"}>
       <div className="loginContainer">
         <select className="languageSlector">
           <option value="english">English</option>
@@ -148,8 +52,8 @@ const Login = ({toggle}) => {
             <input
               type="tel"
               placeholder="Please enter mobile number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              value={mobileNumber}
+              onChange={(e) => setMobileNumber(e.target.value)}
             />
           </div>
 
