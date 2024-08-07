@@ -1,7 +1,9 @@
 import React from 'react';
 import p from './indri.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const SingleProduct = () => {
+    const navigate = useNavigate()
     const item = {
         photo: p,
         productCode: "T8768",
@@ -51,7 +53,15 @@ const SingleProduct = () => {
                     <div className='font-bold text-xl text-red-500'>{item.purchaseLevel}</div>
                     <div>Purchase Level</div>
                 </div>
+
             </div>
+            <div className='w-full rounded-lg  mx-auto p-4  mt-4  bg-white text-white'>
+            <div className="bg-red-200 text-blue-500 p-4 rounded-lg shadow-md flex flex-col text-center" onClick={() => { navigate('/make-payment', { state: item }) }}>
+                <div className='font-bold text-xl text-red-500'>Buy now</div>
+                <div>Buy Now</div>
+            </div>
+            </div>
+            
         </div>
     )
 }

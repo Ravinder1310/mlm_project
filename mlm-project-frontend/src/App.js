@@ -13,7 +13,7 @@ import MyProfile from './components/MyProfile/MyProfile.js';
 import MyTeam from './components/MyTeam/MyTeam.js';
 import { useState } from 'react';
 function App() {
-  const [loggedIn,setLoggedIn]=useState(false);
+  const [loggedIn,setLoggedIn]=useState(true);
   const toggle=()=>{
     setLoggedIn(!loggedIn);
   }
@@ -22,6 +22,7 @@ function App() {
       <Routes>
       <Route path="/" element={<Login toggle={toggle}/>} />
       <Route path="/register" element={<Register />} />
+      <Route path="/make-payment" element={<BindBankCard />} />
       {loggedIn&&<>
       <Route path="/home" element={<Home />} />
       <Route path="/my-profile" element={<MyProfile toggle={toggle}/>} />
@@ -29,7 +30,6 @@ function App() {
       <Route path="/single-product" element={<SingleProduct/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/my-team" element={<MyTeam/>} />
-      <Route path="/bindBankcard" element={<BindBankCard />} />
       <Route path="/invite-friends" element={<Invitation />} />
       <Route path="/bonus" element={<Bonus />} />
       </>}

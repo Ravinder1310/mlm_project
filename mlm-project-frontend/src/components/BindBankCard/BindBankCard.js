@@ -1,12 +1,31 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 
 function BindBankCard() {
+    const location = useLocation()
+    const item = location.state;
+    console.log("card detail",item);
+    
     return (
-        <div className="sm:w-2/5 mx-auto p-4 h-full  bg-slate-400">
+        <div className="sm:w-2/5 mx-auto p-4 pb-16  bg-red-500 text-white">
             <div className="flex justify-between">
                 <div className="cursor-pointer">◀️ Back</div>
-                <div className="font-bold">Bind Bank Card</div>
+                <div className="font-bold">Make Payment</div>
                 <div className="font-bold w-9"></div>
+            </div>
+            <div className='my-4 flex justify-between text-red-600'>
+                <div className='h-28 w-1/4 rounded-lg bg-white'  style={{ 
+                                        backgroundImage: `url(${item.photo})`, 
+                                        backgroundSize: 'cover', 
+                                        backgroundPosition: 'center' 
+                                    }}>
+                </div>
+                <div className='h-28 w-3/5 rounded-lg bg-white p-2'>
+                <div>Product Price:({item.price})INR</div>
+                <div>Product Code:{item.productCode}</div>
+                <div>Terms:{item.term}days</div>
+                <div>Daily Income:({item.dailyIncome})INR</div>
+                </div>
             </div>
             <div className="bg-white p-4 mt-4 rounded-lg">
                 <div className="border-b flex justify-between items-center" >

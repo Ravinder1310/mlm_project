@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "../../components/Layout";
-import 'flowbite/dist/flowbite.css';
+// import 'flowbite/dist/flowbite.css';
 import "./Register.css";
 
 
