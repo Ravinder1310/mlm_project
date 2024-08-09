@@ -15,6 +15,16 @@ import ForgotPassword from './pages/forgotPassword/forgotPassword.js';
 import Checkout from './pages/ckeckout/checkout.js';
 import TransactionCompleted from './pages/transaction/transaction.js';
 import PrivateRoute from './routes/privateRoutes.js';
+import Dashboard from './pages/Admin/AdminDashbord/AdminDashbord.js';
+import AllUsers from './pages/Admin/AllUsers/AllUsers.js';
+import PaidUsers from './pages/Admin/PaidUsers/PaidUsers.js';
+import UnpaidUsersList from './pages/Admin/UnpaidUserslist/UnpaidUserslist.js';
+import BlockedUsers from './pages/Admin/BlockedUsers/BlockedUsers.js';
+import DownlineUsers from './pages/Admin/DownlineUsers/DownlineUsers.js';
+import ActivationReport from './pages/Admin/ActivationReport/ActivationReport.js';
+import ActivateUserForm from './pages/Admin/ActivateUserForm/ActivateUserForm.js';
+import AdminTransactions from './pages/Admin/AdminTransaction/AdminTransacion.js';
+import AdminRoute from './routes/adminRoutes.js';
 function App() {
   
   return (
@@ -33,6 +43,17 @@ function App() {
           <Route path="user/my-team" element={<MyTeam />} />
           <Route path="user/forgot-password" element={<ForgotPassword />} />
           <Route path="user/make-payment" element={<BindBankCard />} />
+      </Route>
+      <Route path="/dashboard" element={<AdminRoute />}>
+          <Route path="admin" element={<Dashboard />} />
+          <Route path="admin/all-users" element={<AllUsers />} />
+          <Route path="admin/all-paid-users" element={<PaidUsers />} />
+          <Route path="admin/all-unpaid-users-list" element={<UnpaidUsersList />} />
+          <Route path="admin/blocked-users" element={<BlockedUsers />} />
+          <Route path="admin/downline-users" element={<DownlineUsers />} />
+          <Route path="admin/activation-report" element={<ActivationReport />} />
+          <Route path="admin/activate-user" element={<ActivateUserForm />} />
+          <Route path="admin/transactions" element={<AdminTransactions />} />
       </Route>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
