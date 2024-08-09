@@ -29,7 +29,7 @@ const Login = ({toggle}) => {
       toast.error("Invalid CAPTCHA code.");
       return;
     }
-    login(mobileNumber, password, inputCaptcha, verificationCode);
+    login(mobileNumber, password);
   };
 
   return (
@@ -87,8 +87,8 @@ const Login = ({toggle}) => {
           </div>
 
           <div className="forgot">
-            <div>Forgot Password</div>
-            <div className="text-white" onClick={() => navigate('/register')}>Register Now</div>
+            <div className="text-white cursor-pointer" onClick={() => navigate('users/user/forgot-password')}>Forgot Password</div>
+            <div className="text-white cursor-pointer" onClick={() => navigate('/register')}>Register Now</div>
           </div>
 
           <button type="submit" className="signUpBtn">Login</button>

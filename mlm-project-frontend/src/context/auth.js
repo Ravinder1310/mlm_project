@@ -7,7 +7,6 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -17,30 +16,37 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = async (mobileNumber, password, inputCaptcha, verificationCode) => {
+  const login = async (mobileNumber, password) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/v1/auth/login', {
+
+      const apiUrl = process.env.REACT_APP_API_URL;
+      if (!apiUrl) {
+        throw new Error("API URL is not defined in the environment variables");
+      }
+
+      const response = await axios.post(`http://localhost:5000/api/v1/auth/login`, {
         mobileNumber,
         password
       });
-
-      const { token } = response.data;
-      localStorage.setItem('token', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      setUser({ mobileNumber });
-      toast.success('Logged in successfully!');
-      navigate('/home');
+      console.log("response=>",response);
+      
+      // const { token } = response.data;
+      // localStorage.setItem('token', token);
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      // setUser({ mobileNumber });
+      // toast.success('Logged in successfully!');
     } catch (error) {
-      toast.error(error.response.data.error || 'Login failed');
+      toast.error("error.response.data.error" || 'Login failed');
     }
   };
 
-  const register = async (mobileNumber, smsCode, password, referralCode) => {
+  const register = async (mobileNumber, smsCode, password, referralCode, answer) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/v1/auth/signup', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, {
         mobileNumber,
         password,
-        referredBy: referralCode
+        referredBy: referralCode,
+        answer
       });
 
       const { token } = response.data;
@@ -48,7 +54,6 @@ export const AuthProvider = ({ children }) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser({ mobileNumber });
       toast.success('Registered successfully!');
-      navigate('/home');
     } catch (error) {
       toast.error(error.response.data.error || 'Registration failed');
     }
@@ -56,7 +61,7 @@ export const AuthProvider = ({ children }) => {
 
   const sendSmsCode = async (mobileNumber) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/v1/send-sms', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/send-sms`, {
         mobileNumber
       });
       // Check the structure of response.data
@@ -68,17 +73,33 @@ export const AuthProvider = ({ children }) => {
       return null;
     }
   };
-  
+
+  const forgotPassword = async (mobileNumber, newPassword, answer) => {
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/forgot-pass`, {
+        mobileNumber,
+        newPassword,
+        answer
+      });
+      if (response.data.success) {
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error('Error in forgotPassword:', error);
+      toast.error('Something went wrong');
+    }
+  };
 
   const logout = () => {
     localStorage.removeItem('token');
     delete axios.defaults.headers.common['Authorization'];
     setUser(null);
-    navigate('/login');
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, sendSmsCode, logout }}>
+    <AuthContext.Provider value={{ user, login, register, sendSmsCode, forgotPassword, logout }}>
       {children}
     </AuthContext.Provider>
   );

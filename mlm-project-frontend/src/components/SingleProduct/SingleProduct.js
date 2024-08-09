@@ -1,58 +1,61 @@
 import React from 'react';
 import p from './indri.jpg';
+import Layout from '../Layout';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SingleProduct = () => {
-    const item = {
-        photo: p,
-        productCode: "T8768",
-        price: "570",
-        term: "45",
-        dailyIncome: '23',
-        totalRevenue: '1035',
-        totalReturn: '207',
-        purchaseLevel: 'unlimited'
-    }
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const item = location.state
 
     return (
+        <Layout title={`Package ${item.productCode} - Rita Drinks`}>
         <div className='sm:w-2/5 mx-auto p-4 pb-16  bg-red-500 text-white'>
             <div className="flex justify-between">
                 <div className="cursor-pointer text-white">◀️ Back</div>
-                <div className='text-white text-lg'>Single Product</div>
+                <div className='text-white text-lg'>Package Details</div>
                 <div className="font-bold w-9"></div>
             </div>
-            <div className='h-60 rounded-lg  mt-4' style={{
-                backgroundImage: `url(${item.photo})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-            }}></div>
-            <div className='font-bold text-2xl mb-4'>Product Code: {item.productCode}</div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-2 gap-4 bg-white rounded-lg">
+            <img src={`${item.img1}`} className={'rounded-lg'}/>
+            <p className='mt-3 font-bold text-xl'>Product Name:- <span className='mt-1 font-normal text-lg'>Rs. {item.name}</span></p>
+            <div className="grid grid-cols-2 mt-5 lg:grid-cols-3 p-2 gap-4 bg-white rounded-lg">
                 <div className="bg-red-200 text-blue-500 p-4 rounded-lg shadow-md flex flex-col text-center">
-                    <div className='font-bold text-xl text-red-500'>INR:{item.price}</div>
+                    <div className='font-bold text-xl text-red-500'>Rs. {item.price}</div>
                     <div>Price</div>
                 </div>
                 <div className="bg-red-200 text-blue-500 p-4 rounded-lg shadow-md flex flex-col text-center">
-                    <div className='font-bold text-xl text-red-500'>{item.term}days</div>
+                    <div className='font-bold text-xl text-red-500'>{item.cycle} days</div>
                     <div>Term</div>
                 </div>
                 <div className="bg-red-200 text-blue-500 p-4 rounded-lg shadow-md flex flex-col text-center">
-                    <div className='font-bold text-xl text-red-500'>INR:{item.dailyIncome}</div>
+                    <div className='font-bold text-xl text-red-500'>Rs. {item.income}</div>
                     <div>Daily Income</div>
                 </div>
                 <div className="bg-red-200 text-blue-500 p-4 rounded-lg shadow-md flex flex-col text-center">
-                    <div className='font-bold text-xl text-red-500'>INR:{item.totalRevenue}</div>
+                    <div className='font-bold text-xl text-red-500'>Rs. {item.income * item.cycle}</div>
                     <div>Total Revenue</div>
                 </div>
                 <div className="bg-red-200 text-blue-500 p-4 rounded-lg shadow-md flex flex-col text-center">
-                    <div className='font-bold text-xl text-red-500'>{item.totalReturn}%</div>
+                    <div className='font-bold text-xl text-red-500'>{Math.floor(((item.income * item.cycle)/item.price)*100)}%</div>
                     <div>Total Return</div>
                 </div>
                 <div className="bg-red-200 text-blue-500 p-4 rounded-lg shadow-md flex flex-col text-center">
-                    <div className='font-bold text-xl text-red-500'>{item.purchaseLevel}</div>
+                    <div className='font-bold text-xl text-red-500'>Limited</div>
                     <div>Purchase Level</div>
                 </div>
             </div>
+            <div className='w-[100%] mt-4 bg-white rounded-lg pt-4'>
+               <h2 className='text-black ml-3 mb-4 font-bold text-xl'>Package description</h2>
+               <img src={`${item.img2}`} className=""/>
+               <p className='text-black p-2'>{item.description}</p>
+            </div>
+            <div className="bg-white text-blue-500 p-4 mt-4 mb-5 cursor-pointer rounded-lg shadow-md flex flex-col text-center" onClick={() => { navigate('/make-payment', { state: item }) }}>
+                <div className='font-bold text-xl text-red-500'onClick={()=>{navigate('users/user/bindBankCard',{state:item})}}>Buy now</div>
+            </div>
         </div>
+        </Layout>
     )
 }
 

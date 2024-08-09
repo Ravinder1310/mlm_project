@@ -13,6 +13,7 @@ const Register = () => {
   const [smsCode, setSmsCode] = useState("");
   const [generatedSmsCode, setGeneratedSmsCode] = useState("");
   const [password, setPassword] = useState("");
+  const [answer, setAnswer] = useState('')
   const [referralCode, setReferralCode] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -43,7 +44,7 @@ const Register = () => {
       return;
     }
     setIsSubmitting(true);
-    await register(mobileNumber, smsCode, password, referralCode);
+    await register(mobileNumber, smsCode, password, referralCode, answer);
     setIsSubmitting(false);
   };
 
@@ -118,9 +119,23 @@ const Register = () => {
             />
           </div>
 
+          <div className="inputWrapper">
+            <img
+              src="/images/codeInput.png"
+              alt="Referral Code Icon"
+              className="phoneIcon"
+            />
+            <input
+              type="text"
+              placeholder="Your school name (Any name to reset password)"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+          </div>
+
           <div className="exist">
             <h3>Existing Account?</h3>
-            <div onClick={() => navigate('/')} className="cursor-pointer text-white">Sign in now</div>
+            <div onClick={() => navigate('/login')} className="cursor-pointer text-white">Sign in now</div>
           </div>
           
           <div className="flex justify-center">
