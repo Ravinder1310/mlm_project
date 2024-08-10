@@ -5,27 +5,26 @@ import axios from 'axios';
 import Spinner from '../components/spinner';
 
  const PrivateRoute = () => {
- const navigate=useNavigate()
    const [ok, setOk] = useState(false);
-   const {auth, setAuth} = useAuth();
+   const [auth, setAuth] = useAuth();
 
    useEffect(() => {
     const authCheck = async() => {
-        console.log("response");
-        const res = await axios.get(`${process.env.REACT_APP_API}/api/v1/auth/user-auth`);
+        
+        
+        const res = await axios.get(`http://localhost:5000/api/v1/auth/user-auth`);
         
         if(res.data.ok){
             setOk(true);
-            console.log('helo');
             
         }else{
-            navigate('/login');
             setOk(false)
-            console.log('hwlo');
             
         }
     }
-    if(auth?.token) console.log(auth?.token);
+    console.log(auth);
+    
+    if(auth?.token) authCheck();
    },[auth?.token])
 
   return ok ? <Outlet/> : <Spinner/>

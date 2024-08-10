@@ -4,7 +4,13 @@ import HomeLinks from '../../components/HomeLinks/HomeLinks'
 import Tasks from '../../components/Tasks/Tasks'
 import Layout from '../../components/Layout'
 import Swipper from '../../components/swipper'
+import { useAuth } from '../../context/auth'
 function Home() {
+
+  const [auth,setAuth] = useAuth();
+
+  console.log(auth?.token);
+  
   return (
     <Layout title={"Home - Rita Drinks"}>
     <div className="sm:w-2/5 mx-auto bg-red-500 pb-16 pt-10">
