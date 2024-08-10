@@ -2,11 +2,12 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
+// import { useNavigate } from 'react-router-dom';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -30,11 +31,12 @@ export const AuthProvider = ({ children }) => {
       });
       console.log("response=>",response);
       
-      // const { token } = response.data;
-      // localStorage.setItem('token', token);
-      // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      // setUser({ mobileNumber });
-      // toast.success('Logged in successfully!');
+      const { token } = response.data;
+      localStorage.setItem('token', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      setUser({ mobileNumber });
+      toast.success('Logged in successfully!');
+      navigate('/')
     } catch (error) {
       toast.error("error.response.data.error" || 'Login failed');
     }
@@ -54,6 +56,7 @@ export const AuthProvider = ({ children }) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser({ mobileNumber });
       toast.success('Registered successfully!');
+      navigate('/login')
     } catch (error) {
       toast.error(error.response.data.error || 'Registration failed');
     }

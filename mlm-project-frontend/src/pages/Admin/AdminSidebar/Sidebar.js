@@ -3,6 +3,7 @@ import { FaBars, FaTachometerAlt,FaUserCheck,FaKey  , FaUser, FaCog, FaAngleDown
 import HorizontalNavbar from '../AdminNavbar/AdminNavbar';
 import { FcStatistics } from "react-icons/fc";
 import { GiCash,GiAchievement  } from "react-icons/gi";
+import { MdOutlineSettingsInputSvideo } from "react-icons/md";
 import { FaPhotoFilm } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 const Sidebar = ({toggle}) => {
@@ -23,10 +24,10 @@ const Sidebar = ({toggle}) => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col">
       {/* <HorizontalNavbar toggle={toggle}/> */}
       <div className="flex flex-row flex-grow">
-        <div className={`flex flex-col ${isOpen ? 'w-64' : 'w-20'} h-screen bg-gray-800 text-white transition-width duration-300 relative`}>
+        <div className={`flex flex-col ${isOpen ? 'w-64' : 'w-20'}  bg-gray-800 text-white transition-width duration-300 relative`}>
           <button 
             onClick={toggleNavbar} 
             className="absolute top-4 left-5 text-3xl focus:outline-none"
@@ -35,7 +36,13 @@ const Sidebar = ({toggle}) => {
           </button>
           <div className="mt-20">
             <ul>
-              <li className="group " onClick={()=>{navigate('/admin/dashboard')}}>
+            <li className="group " onClick={()=>{navigate('/dashboard/admin/all-products')}}>
+                <div onClick={() => handleDropdownClick(0)} className="flex  items-center px-4 py-2 cursor-pointer hover:bg-gray-700">
+                  <MdOutlineSettingsInputSvideo   className="mr-2 text-4xl" />
+                  {isOpen && <span className="flex-grow">Products</span>}
+                </div>
+              </li>
+              <li className="group " onClick={()=>{navigate('/dashboard/admin')}}>
                 <div onClick={() => handleDropdownClick(0)} className="flex  items-center px-4 py-2 cursor-pointer hover:bg-gray-700">
                   <FaTachometerAlt className="mr-2 text-4xl" />
                   {isOpen && <span className="flex-grow">Dashboard</span>}
@@ -49,12 +56,12 @@ const Sidebar = ({toggle}) => {
                 </div>
                 {openDropdown === 1 && isOpen && (
                   <ul className="pl-10">
-                    <li className="py-1 cursor-pointer hover:bg-gray-700" onClick={()=>{navigate('/admin/all-users')}}>All Users</li>
-                    <li className="py-1 cursor-pointer hover:bg-gray-700" onClick={()=>{navigate('/admin/all-paid-users')}}>Paid Users</li>
-                    <li className="py-1 cursor-pointer hover:bg-gray-700"  onClick={()=>{navigate('/admin/all-unpaid-users-list')}}>Unpaid Users</li>
-                    <li className="py-1 cursor-pointer hover:bg-gray-700"  onClick={()=>{navigate('/admin/blocked-users')}} >Blocked Users</li>
-                    <li className="py-1 cursor-pointer hover:bg-gray-700"  onClick={()=>{navigate('/admin/downline-users')}}>Downline Users</li>
-                    <li className="py-1 cursor-pointer hover:bg-gray-700" onClick={()=>{navigate('/admin/activation-report')}}>Activation Report</li>
+                    <li className="py-1 cursor-pointer hover:bg-gray-700" onClick={()=>{navigate('/dashboard/admin/all-users')}}>All Users</li>
+                    <li className="py-1 cursor-pointer hover:bg-gray-700" onClick={()=>{navigate('/dashboard/admin/all-paid-users')}}>Paid Users</li>
+                    <li className="py-1 cursor-pointer hover:bg-gray-700"  onClick={()=>{navigate('/dashboard/admin/all-unpaid-users-list')}}>Unpaid Users</li>
+                    <li className="py-1 cursor-pointer hover:bg-gray-700"  onClick={()=>{navigate('/dashboard/admin/blocked-users')}} >Blocked Users</li>
+                    <li className="py-1 cursor-pointer hover:bg-gray-700"  onClick={()=>{navigate('/dashboard/admin/downline-users')}}>Downline Users</li>
+                    <li className="py-1 cursor-pointer hover:bg-gray-700" onClick={()=>{navigate('/dashboard/admin/activation-report')}}>Activation Report</li>
                     <li className="py-1 cursor-pointer hover:bg-gray-700">Access Panel</li>
                   </ul>
                 )}

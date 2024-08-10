@@ -5,8 +5,8 @@ import axios from 'axios';
 
  const AdminRoute = () => {
 
-   const [ok, setOk] = useState(false);
-   const [auth, setAuth] = useAuth();
+   const [ok, setOk] = useState(true);
+   const {auth, setAuth} = useAuth();
 
    useEffect(() => {
     const authCheck = async() => {

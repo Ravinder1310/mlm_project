@@ -9,6 +9,8 @@ const SingleProduct = () => {
     const location = useLocation();
 
     const item = location.state
+    // console.log("iten-----",item);
+    
 
     return (
         <Layout title={`Package ${item.productCode} - Rita Drinks`}>
@@ -51,8 +53,8 @@ const SingleProduct = () => {
                <img src={`${item.img2}`} className=""/>
                <p className='text-black p-2'>{item.description}</p>
             </div>
-            <div className="bg-white text-blue-500 p-4 mt-4 mb-5 cursor-pointer rounded-lg shadow-md flex flex-col text-center" onClick={() => { navigate('/make-payment', { state: item }) }}>
-                <div className='font-bold text-xl text-red-500'onClick={()=>{navigate('users/user/bindBankCard',{state:item})}}>Buy now</div>
+            <div className="bg-white text-blue-500 p-4 mt-4 mb-5 cursor-pointer rounded-lg shadow-md flex flex-col text-center" onClick={()=>{navigate('/users/user/bindBankCard',{state:item})}}>
+                <div className='font-bold text-xl text-red-500'>Buy now</div>
             </div>
         </div>
         </Layout>

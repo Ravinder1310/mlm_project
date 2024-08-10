@@ -25,6 +25,9 @@ import ActivationReport from './pages/Admin/ActivationReport/ActivationReport.js
 import ActivateUserForm from './pages/Admin/ActivateUserForm/ActivateUserForm.js';
 import AdminTransactions from './pages/Admin/AdminTransaction/AdminTransacion.js';
 import AdminRoute from './routes/adminRoutes.js';
+import AddProduct from './pages/Admin/AddProduct/AddProduct.js';
+import AllProducts from './pages/Admin/AllProducts/AllProducts.js';
+import UpdateProduct from './pages/Admin/UpdateProduct/UpdateProduct.js';
 function App() {
   
   return (
@@ -46,6 +49,9 @@ function App() {
       </Route>
       <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<Dashboard />} />
+          <Route path="admin/add-product" element={<AddProduct/>} />
+          <Route path="admin/all-products" element={<AllProducts/>} />
+          <Route path="admin/update-product/:id" element={<UpdateProduct/>} />
           <Route path="admin/all-users" element={<AllUsers />} />
           <Route path="admin/all-paid-users" element={<PaidUsers />} />
           <Route path="admin/all-unpaid-users-list" element={<UnpaidUsersList />} />

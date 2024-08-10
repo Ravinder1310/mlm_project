@@ -86,7 +86,7 @@ function ProductPage() {
                 {
                     cards.map((item, idx) => {
                         return (
-                            <div key={idx} onClick={()=>{navigate('users/user/single-product',{state:item})}} className=" text-white hover:border-black  cursor-pointer hover:shadow-2xl hover:bg-slate-200 rounded-lg duration-500 hover:text-blue-700 shadow-red-000 flex flex-col  border p-4">
+                            <div key={idx} onClick={()=>{navigate('/users/user/single-product',{state:item})}} className=" text-white hover:border-black  cursor-pointer hover:shadow-2xl hover:bg-slate-200 rounded-lg duration-500 hover:text-blue-700 shadow-red-000 flex flex-col  border p-4">
                                 <img className='h-[250px] w-[100%] rounded-lg sm:w-[90%] sm:h-[250px]' src={`${item.img1}`}/>
                                 <div className='mt-3 font-bold'>Package Name:- {item.name}</div>
                                 <div className='flex gap-4'>

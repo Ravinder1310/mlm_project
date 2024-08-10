@@ -29,7 +29,7 @@ const Login = ({toggle}) => {
       toast.error("Invalid CAPTCHA code.");
       return;
     }
-    login(mobileNumber, password);
+    login(mobileNumber, password)
   };
 
   return (

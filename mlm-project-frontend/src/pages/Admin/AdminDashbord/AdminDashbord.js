@@ -12,7 +12,7 @@ const Dashboard = () => {
   const [paidUsersLastMonth, setPaidUsersLastMonth] = useState(0);
 
   return (
-    <div className='flex '>
+    <div className='flex h-screen bg-slate-500'>
       <Sidebar />
       <div className="p-4 w-[100%]  flex-1">
         <div className="flex gap-8">
