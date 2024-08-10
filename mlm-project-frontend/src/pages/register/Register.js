@@ -4,28 +4,27 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "../../components/Layout";
 import "./Register.css";
-import { useAuth } from "../../context/auth";
 import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { register, sendSmsCode } = useAuth();
   const [mobileNumber, setMobileNumber] = useState("");
   const [smsCode, setSmsCode] = useState("");
   const [generatedSmsCode, setGeneratedSmsCode] = useState("");
   const [password, setPassword] = useState("");
-  const [answer, setAnswer] = useState('')
+  const [answer, setAnswer] = useState('');
   const [referralCode, setReferralCode] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Function to send SMS code
   const handleSendSms = async () => {
     if (!mobileNumber) {
       toast.error("Please enter your mobile number.");
       return;
     }
-  
+
     try {
-      const code = await sendSmsCode(mobileNumber);
+      const code = await customSendSmsCode(mobileNumber);
       if (code) {
         setGeneratedSmsCode(code);
         toast.success("SMS verification code sent!");
@@ -36,22 +35,21 @@ const Register = () => {
       toast.error("An error occurred while sending SMS code.");
     }
   };
-  
-  sendSmsCode = async (mobileNumber) => {
+
+  // Function to handle SMS code sending
+  const customSendSmsCode = async (mobileNumber) => {
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/send-sms`, {
         mobileNumber
       });
-      // Check the structure of response.data
-      console.log('Response:', response); // Debugging line
-      return response.data.smsCode; // Ensure this matches the actual response structure
+      return response.data.smsCode;
     } catch (error) {
-      console.error('Error in sendSmsCode:', error); // Debugging line
       toast.error(error.response?.data?.error || 'Failed to send SMS code');
       return null;
     }
   };
 
+  // Function to handle registration form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (smsCode !== generatedSmsCode) {
@@ -59,11 +57,12 @@ const Register = () => {
       return;
     }
     setIsSubmitting(true);
-    await register(mobileNumber, smsCode, password, referralCode, answer);
+    await customRegister(mobileNumber, password, referralCode, answer);
     setIsSubmitting(false);
   };
 
-register = async (mobileNumber, smsCode, password, referralCode, answer) => {
+  // Function to handle registration
+  const customRegister = async (mobileNumber, password, referralCode, answer) => {
     try {
       const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, {
         mobileNumber,
@@ -72,15 +71,16 @@ register = async (mobileNumber, smsCode, password, referralCode, answer) => {
         answer
       });
 
-      if(res && res.data.success){
-        toast.success( res.data && res.data.message);
-        navigate("/login")
-      }else{
-
-        toast.error(res.data.message)
+      if (res && res.data.token) { // Assuming the token is returned on success
+        toast.success("Registration successful! Redirecting to login...");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000); // Delay redirect to allow the user to see the toast message
+      } else {
+        toast.error(res.data.message || "Registration failed");
       }
     } catch (error) {
-      toast.error(error.response.data.error || 'Registration failed');
+      toast.error(error.response?.data?.error || 'Registration failed');
     }
   };
 
@@ -95,17 +95,14 @@ register = async (mobileNumber, smsCode, password, referralCode, answer) => {
 
         <form onSubmit={handleSubmit}>
           <div className="inputWrapper">
-            <img
-              src="/images/phoneInput.png"
-              alt="Phone Icon"
-              className="phoneIcon"
-            />
+            <img src="/images/phoneInput.png" alt="Phone Icon" className="phoneIcon" />
             <span className="countryCode">+91</span>
             <input
               type="tel"
               placeholder="Please enter mobile number"
               value={mobileNumber}
               onChange={(e) => setMobileNumber(e.target.value)}
+              required
             />
           </div>
 
@@ -116,6 +113,7 @@ register = async (mobileNumber, smsCode, password, referralCode, answer) => {
               placeholder="Enter SMS verification code"
               value={smsCode}
               onChange={(e) => setSmsCode(e.target.value)}
+              required
             />
             <button
               type="button"
@@ -128,25 +126,18 @@ register = async (mobileNumber, smsCode, password, referralCode, answer) => {
           </div>
 
           <div className="inputWrapper">
-            <img
-              src="/images/passInput.png"
-              alt="Password Icon"
-              className="phoneIcon"
-            />
+            <img src="/images/passInput.png" alt="Password Icon" className="phoneIcon" />
             <input
               type="password"
               placeholder="Please enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
 
           <div className="inputWrapper">
-            <img
-              src="/images/codeInput.png"
-              alt="Referral Code Icon"
-              className="phoneIcon"
-            />
+            <img src="/images/codeInput.png" alt="Referral Code Icon" className="phoneIcon" />
             <input
               type="text"
               placeholder="Referral code (optional)"
@@ -156,16 +147,13 @@ register = async (mobileNumber, smsCode, password, referralCode, answer) => {
           </div>
 
           <div className="inputWrapper">
-            <img
-              src="/images/codeInput.png"
-              alt="Referral Code Icon"
-              className="phoneIcon"
-            />
+            <img src="/images/codeInput.png" alt="School Name Icon" className="phoneIcon" />
             <input
               type="text"
-              placeholder="Your school name (Any name to reset password)"
+              placeholder="Your school name (for password reset)"
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
+              required
             />
           </div>
 
