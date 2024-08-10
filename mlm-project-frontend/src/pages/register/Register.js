@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Layout from "../../components/Layout";
 import "./Register.css";
 import { useAuth } from "../../context/auth";
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -36,6 +37,20 @@ const Register = () => {
     }
   };
   
+  sendSmsCode = async (mobileNumber) => {
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/send-sms`, {
+        mobileNumber
+      });
+      // Check the structure of response.data
+      console.log('Response:', response); // Debugging line
+      return response.data.smsCode; // Ensure this matches the actual response structure
+    } catch (error) {
+      console.error('Error in sendSmsCode:', error); // Debugging line
+      toast.error(error.response?.data?.error || 'Failed to send SMS code');
+      return null;
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +61,27 @@ const Register = () => {
     setIsSubmitting(true);
     await register(mobileNumber, smsCode, password, referralCode, answer);
     setIsSubmitting(false);
+  };
+
+register = async (mobileNumber, smsCode, password, referralCode, answer) => {
+    try {
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, {
+        mobileNumber,
+        password,
+        referredBy: referralCode,
+        answer
+      });
+
+      if(res && res.data.success){
+        toast.success( res.data && res.data.message);
+        navigate("/login")
+      }else{
+
+        toast.error(res.data.message)
+      }
+    } catch (error) {
+      toast.error(error.response.data.error || 'Registration failed');
+    }
   };
 
   return (

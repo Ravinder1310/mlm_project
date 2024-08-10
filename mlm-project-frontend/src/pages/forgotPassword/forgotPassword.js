@@ -9,18 +9,27 @@ const ForgotPassword = () => {
   const [mobileNumber, setPhone] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [answer, setAnswer] = useState("");
-  const { forgotPassword } = useAuth();
   const navigate = useNavigate();
   
-  const handleSubmit = async (e) => {
+
+  const handleSubmit =  async(e) => {
     e.preventDefault();
+  //   console.log(email,password);
     try {
-      await forgotPassword(mobileNumber, newPassword, answer);
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/forgot-pass`,{mobileNumber,newPassword,answer})
+      if(res && res.data.success){
+        toast.success( res.data && res.data.message);
+        navigate("/login")
+      }else{
+
+        toast.error(res.data.message)
+      }
     } catch (error) {
       console.log(error);
-      toast.error('Something went wrong');
+      toast.error('Something went wrong')
     }
-  };
+    toast.success('Password reset successfully')
+  }
 
   return (
     <Layout title={"Forgot Password - Rita Drinks"}>

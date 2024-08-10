@@ -3,10 +3,21 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../Layout";
 import { useAuth } from "../../context/auth";
+import { toast } from "react-toastify";
 
-function MyProfile({ toggle }) {
+function MyProfile() {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const [auth, setAuth] = useAuth();
+
+  const handleLogout = () => {
+    setAuth({
+      ...auth,
+      user: null,
+      token: "",
+    });
+    localStorage.removeItem("auth");
+    toast.success("Logout successfully");
+  };
 
   return (
     <Layout>
@@ -235,9 +246,7 @@ function MyProfile({ toggle }) {
             </div>
             <div
               className="bg-white rounded-md p-3 shadow-md flex items-center  cursor-pointer hover:bg-blue-300 duration-200"
-              onClick={() => {
-                logout();
-              }}
+              onClick={handleLogout}
             >
               <div className="rounded-full bg-purple-200  mr-4">
                 <img

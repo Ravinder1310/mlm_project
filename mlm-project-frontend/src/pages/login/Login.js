@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 import Layout from "../../components/Layout";
 import { useAuth } from "../../context/auth";
+import axios from "axios";
 
-const Login = ({toggle}) => {
+const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
   const [mobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");
   const [inputCaptcha, setInputCaptcha] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
+  const [auth,setAuth] = useAuth();
+  const location = useLocation();
 
   useEffect(() => {
     generateVerificationCode();
@@ -23,14 +25,44 @@ const Login = ({toggle}) => {
     setVerificationCode(code);
   };
 
-  const handleLogin = (e) => {
+  // const handleLogin = (e) => {
+  //   e.preventDefault();
+  //   if (inputCaptcha !== verificationCode.toString()) {
+  //     toast.error("Invalid CAPTCHA code.");
+  //     return;
+  //   }
+  //   login(mobileNumber, password)
+  // };
+
+
+  const handleLogin =  async(e) => {
     e.preventDefault();
+    // console.log(email,password);
     if (inputCaptcha !== verificationCode.toString()) {
-      toast.error("Invalid CAPTCHA code.");
-      return;
+          toast.error("Invalid CAPTCHA code.");
+          return;
+        }
+    try {
+      const res = await axios.post(`http://localhost:5000/api/v1/auth/login`,{mobileNumber,password})
+      if(res && res.data.success){
+        toast.success( res.data && res.data.message);
+        setAuth({
+          ...auth,
+          user:res.data.user,
+          token:res.data.token
+        })
+        localStorage.setItem("auth",JSON.stringify(res.data))
+        navigate(location.state || "/")
+      }else{
+
+        toast.error(res.data.message)
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error('Something went wrong')
     }
-    login(mobileNumber, password)
-  };
+    
+  }
 
   return (
     <Layout title={"Login - Rita Drinks"}>

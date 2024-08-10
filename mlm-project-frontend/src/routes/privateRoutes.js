@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../context/auth';
 import { Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Spinner from '../components/spinner';
 
  const PrivateRoute = () => {
  const navigate=useNavigate()
@@ -27,7 +28,7 @@ import axios from 'axios';
     if(auth?.token) authCheck();
    },[auth?.token])
 
-  return ok ? <Outlet/> : <p>Loading....</p>
+  return ok ? <Outlet/> : <Spinner/>
 }
 
 export default PrivateRoute
