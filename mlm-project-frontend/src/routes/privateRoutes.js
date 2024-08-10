@@ -25,7 +25,7 @@ import Spinner from '../components/spinner';
             
         }
     }
-    if(auth?.token) authCheck();
+    if(auth?.token) console.log(auth?.token);
    },[auth?.token])
 
   return ok ? <Outlet/> : <Spinner/>
